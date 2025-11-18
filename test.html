@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Test - Spokable PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .pending {
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #4285f4;
+            color: white;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #3367d6;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Spokable PDF - Library Test</h1>
+    <p>This page tests if all required libraries are loaded correctly.</p>
+
+    <div id="pdfjs-test" class="test-section pending">
+        <h2>PDF.js Test</h2>
+        <p id="pdfjs-status">Testing...</p>
+        <pre id="pdfjs-info"></pre>
+    </div>
+
+    <div id="jspdf-test" class="test-section pending">
+        <h2>jsPDF Test</h2>
+        <p id="jspdf-status">Testing...</p>
+        <pre id="jspdf-info"></pre>
+    </div>
+
+    <div id="config-test" class="test-section pending">
+        <h2>Configuration Test</h2>
+        <p id="config-status">Testing...</p>
+        <pre id="config-info"></pre>
+    </div>
+
+    <div id="api-test" class="test-section pending">
+        <h2>Gemini API Test (Optional)</h2>
+        <p>Enter your API key to test the connection:</p>
+        <input type="password" id="test-api-key" placeholder="Enter API key" style="width: 300px; padding: 8px;">
+        <button onclick="testGeminiAPI()">Test API</button>
+        <p id="api-status">Not tested yet</p>
+        <pre id="api-info"></pre>
+    </div>
+
+    <div class="test-section">
+        <h2>Actions</h2>
+        <button onclick="location.href='index.html'">Go to Main App</button>
+        <button onclick="location.reload()">Reload Tests</button>
+    </div>
+
+    <!-- Load libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/gemini-api.js"></script>
+
+    <script>
+        // Test PDF.js
+        function testPDFjs() {
+            const section = document.getElementById('pdfjs-test');
+            const status = document.getElementById('pdfjs-status');
+            const info = document.getElementById('pdfjs-info');
+
+            try {
+                if (typeof pdfjsLib === 'undefined') {
+                    throw new Error('pdfjsLib is not defined');
+                }
+
+                const version = pdfjsLib.version;
+                const workerSrc = pdfjsLib.GlobalWorkerOptions.workerSrc;
+
+                section.className = 'test-section success';
+                status.textContent = '✅ PDF.js loaded successfully!';
+                info.textContent = `Version: ${version}\nWorker: ${workerSrc}`;
+            } catch (error) {
+                section.className = 'test-section error';
+                status.textContent = '❌ PDF.js failed to load';
+                info.textContent = error.message;
+            }
+        }
+
+        // Test jsPDF
+        function testJsPDF() {
+            const section = document.getElementById('jspdf-test');
+            const status = document.getElementById('jspdf-status');
+            const info = document.getElementById('jspdf-info');
+
+            try {
+                if (typeof window.jspdf === 'undefined') {
+                    throw new Error('jsPDF is not defined');
+                }
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                section.className = 'test-section success';
+                status.textContent = '✅ jsPDF loaded successfully!';
+                info.textContent = `jsPDF is available and can create documents\nTest document created successfully`;
+            } catch (error) {
+                section.className = 'test-section error';
+                status.textContent = '❌ jsPDF failed to load';
+                info.textContent = error.message;
+            }
+        }
+
+        // Test Configuration
+        function testConfig() {
+            const section = document.getElementById('config-test');
+            const status = document.getElementById('config-status');
+            const info = document.getElementById('config-info');
+
+            try {
+                if (typeof configManager === 'undefined') {
+                    throw new Error('configManager is not defined');
+                }
+
+                const config = configManager.getConfig();
+
+                section.className = 'test-section success';
+                status.textContent = '✅ Configuration loaded successfully!';
+                info.textContent = `Default Model: ${config.defaultModel}\nBatch Size: ${config.batchSize} tokens\nTemperature: ${config.temperature}`;
+            } catch (error) {
+                section.className = 'test-section error';
+                status.textContent = '❌ Configuration failed to load';
+                info.textContent = error.message;
+            }
+        }
+
+        // Test Gemini API
+        async function testGeminiAPI() {
+            const section = document.getElementById('api-test');
+            const status = document.getElementById('api-status');
+            const info = document.getElementById('api-info');
+            const apiKey = document.getElementById('test-api-key').value;
+
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            section.className = 'test-section pending';
+            status.textContent = '⏳ Testing API connection...';
+            info.textContent = 'Sending test request to Gemini API...';
+
+            try {
+                const config = configManager.getConfig();
+                const geminiAPI = new GeminiAPI(apiKey, config);
+                const result = await geminiAPI.testConnection();
+
+                if (result.success) {
+                    section.className = 'test-section success';
+                    status.textContent = '✅ API connection successful!';
+                    info.textContent = result.message + '\n\nYour API key is valid and working.';
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                section.className = 'test-section error';
+                status.textContent = '❌ API connection failed';
+                info.textContent = error.message + '\n\nPlease check:\n- API key is correct\n- API is enabled in Google Cloud\n- You have internet connection';
+            }
+        }
+
+        // Run tests on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testPDFjs();
+                testJsPDF();
+                testConfig();
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

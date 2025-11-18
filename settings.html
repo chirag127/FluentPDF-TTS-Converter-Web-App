@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Spokable PDF Converter</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">📖 Spokable PDF</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="content-section">
+            <h1>Advanced Settings</h1>
+            <p class="subtitle">Customize the conversion process to your needs</p>
+
+            <div class="card">
+                <h2>Prompt Templates</h2>
+                <p>Edit the prompts sent to Gemini API for text transformation</p>
+
+                <div class="form-group">
+                    <label for="systemPrompt">System Prompt</label>
+                    <textarea id="systemPrompt" rows="6" class="form-control"></textarea>
+                    <small>Instructions for how the AI should behave</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="transformPrompt">Transformation Prompt</label>
+                    <textarea id="transformPrompt" rows="8" class="form-control"></textarea>
+                    <small>Main prompt for converting text to spokable format</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="codePrompt">Code Conversion Prompt</label>
+                    <textarea id="codePrompt" rows="6" class="form-control"></textarea>
+                    <small>How to describe code examples in natural language</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="figurePrompt">Figure Description Prompt</label>
+                    <textarea id="figurePrompt" rows="6" class="form-control"></textarea>
+                    <small>How to describe figures and images</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Batch Processing</h2>
+
+                <div class="form-group">
+                    <label for="batchSize">Batch Size (tokens)</label>
+                    <input type="number" id="batchSize" class="form-control" min="1000" max="30000" step="1000">
+                    <small>Number of tokens per batch. Larger = fewer API calls but higher memory usage</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="overlapSize">Overlap Size (tokens)</label>
+                    <input type="number" id="overlapSize" class="form-control" min="0" max="1000" step="50">
+                    <small>Token overlap between batches to maintain context</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxRetries">Max Retries</label>
+                    <input type="number" id="maxRetries" class="form-control" min="1" max="10">
+                    <small>Number of retry attempts for failed API calls</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="retryDelay">Retry Delay (ms)</label>
+                    <input type="number" id="retryDelay" class="form-control" min="1000" max="10000" step="500">
+                    <small>Wait time between retry attempts</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Model Parameters</h2>
+
+                <div class="form-group">
+                    <label for="temperature">Temperature</label>
+                    <input type="range" id="temperature" class="form-range" min="0" max="2" step="0.1">
+                    <output id="temperatureValue">1.0</output>
+                    <small>Controls randomness. Lower = more focused, Higher = more creative</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="topP">Top P</label>
+                    <input type="range" id="topP" class="form-range" min="0" max="1" step="0.05">
+                    <output id="topPValue">0.95</output>
+                    <small>Nucleus sampling threshold</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="topK">Top K</label>
+                    <input type="number" id="topK" class="form-control" min="1" max="100">
+                    <small>Number of top tokens to consider</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxOutputTokens">Max Output Tokens</label>
+                    <input type="number" id="maxOutputTokens" class="form-control" min="1000" max="8000" step="500">
+                    <small>Maximum tokens in each API response</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Transformation Rules</h2>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="preserveFormatting">
+                        Preserve basic formatting (paragraphs, lists)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="expandAcronyms">
+                        Expand acronyms on first use
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="simplifyTechnical">
+                        Simplify technical jargon
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="addTransitions">
+                        Add natural transitions between sections
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="removeReferences">
+                        Remove inline citations and references
+                    </label>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>PDF Output Settings</h2>
+
+                <div class="form-group">
+                    <label for="fontSize">Font Size</label>
+                    <input type="number" id="fontSize" class="form-control" min="8" max="24">
+                    <small>Font size in the output PDF</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="lineHeight">Line Height</label>
+                    <input type="number" id="lineHeight" class="form-control" min="1" max="3" step="0.1">
+                    <small>Line spacing multiplier</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="pageMargin">Page Margin (mm)</label>
+                    <input type="number" id="pageMargin" class="form-control" min="10" max="50">
+                    <small>Margin size for output PDF</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>MCP Integration</h2>
+                <p>Model Context Protocol server configuration (optional)</p>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enableMCP">
+                        Enable MCP Server Integration
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="mcpServerUrl">MCP Server URL</label>
+                    <input type="text" id="mcpServerUrl" class="form-control" placeholder="http://localhost:3000">
+                    <small>URL of your MCP server (if running locally)</small>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="saveSettings" class="btn-primary">Save Settings</button>
+                <button id="resetSettings" class="btn-secondary">Reset to Defaults</button>
+                <button id="exportSettings" class="btn-secondary">Export Settings</button>
+                <button id="importSettings" class="btn-secondary">Import Settings</button>
+            </div>
+
+            <div id="settingsMessage" class="message" style="display: none;"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Spokable PDF Converter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+
+</html>

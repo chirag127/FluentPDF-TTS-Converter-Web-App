@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Spokable PDF Converter</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">📖 Spokable PDF</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="content-section">
+            <h1>Frequently Asked Questions</h1>
+
+            <div class="faq-item card" id="api-key">
+                <h3>How do I get a Google AI Studio API key?</h3>
+                <div class="faq-answer">
+                    <ol class="styled-list">
+                        <li>Visit <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                        </li>
+                        <li>Sign in with your Google account</li>
+                        <li>Click "Get API Key" or "Create API Key"</li>
+                        <li>Copy the generated API key</li>
+                        <li>Paste it into the API key field on our homepage</li>
+                    </ol>
+                    <p><strong>Note:</strong> The API key is free to use with generous quotas. Your key is stored
+                        locally in your browser and never sent to our servers.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>Is my data secure?</h3>
+                <div class="faq-answer">
+                    <p>Yes! This application runs entirely in your browser. Your PDF files and API key never leave your
+                        device except for the direct API calls to Google's Gemini service using your own credentials.
+                    </p>
+                    <p>We have no backend servers, so there's nowhere for your data to be stored or intercepted.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>What file size limits are there?</h3>
+                <div class="faq-answer">
+                    <p>The main limitation is your browser's memory and the Gemini API's token limits. Our automatic
+                        batching system splits large documents into chunks, so you can process books with hundreds of
+                        pages.</p>
+                    <p>For very large files (100+ MB), processing may take longer and consume more API quota.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>Does this work with scanned PDFs?</h3>
+                <div class="faq-answer">
+                    <p>No, this tool requires PDFs with extractable text. Scanned PDFs (images of pages) need OCR
+                        processing first. You can use tools like Adobe Acrobat or online OCR services to convert scanned
+                        PDFs to text-based PDFs before using our converter.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>How much does it cost?</h3>
+                <div class="faq-answer">
+                    <p>The website itself is completely free. However, you'll need a Google AI Studio API key, which
+                        has:</p>
+                    <ul class="styled-list">
+                        <li>Free tier with generous quotas (15 requests per minute for Gemini 1.5 Flash)</li>
+                        <li>Pay-as-you-go pricing for usage beyond free tier</li>
+                        <li>Very affordable rates (typically pennies per document)</li>
+                    </ul>
+                    <p>Check <a href="https://ai.google.dev/pricing" target="_blank">Google AI pricing</a> for current
+                        rates.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>Which Gemini model should I use?</h3>
+                <div class="faq-answer">
+                    <ul class="styled-list">
+                        <li><strong>Gemini 1.5 Flash:</strong> Fastest and most cost-effective. Great for most
+                            documents.</li>
+                        <li><strong>Gemini 1.5 Pro:</strong> Higher quality output, better for complex technical
+                            content.</li>
+                        <li><strong>Gemini Pro:</strong> Balanced option for general use.</li>
+                    </ul>
+                    <p>We recommend starting with Gemini 1.5 Flash and upgrading to Pro if you need better quality.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>Can I customize the conversion process?</h3>
+                <div class="faq-answer">
+                    <p>Yes! Visit the <a href="settings.html">Settings page</a> to:</p>
+                    <ul class="styled-list">
+                        <li>Edit prompt templates</li>
+                        <li>Adjust batch sizes</li>
+                        <li>Modify temperature and other model parameters</li>
+                        <li>Customize how code and figures are described</li>
+                        <li>Set transformation rules</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>How long does conversion take?</h3>
+                <div class="faq-answer">
+                    <p>Processing time depends on:</p>
+                    <ul class="styled-list">
+                        <li>Document length (pages and word count)</li>
+                        <li>Selected Gemini model (Flash is faster than Pro)</li>
+                        <li>API rate limits (15 requests/minute for free tier)</li>
+                        <li>Your internet connection speed</li>
+                    </ul>
+                    <p>Typical times: 50-page book = 5-10 minutes, 200-page book = 20-40 minutes</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>What happens if processing fails?</h3>
+                <div class="faq-answer">
+                    <p>If an error occurs, you'll see a detailed error message. Common issues:</p>
+                    <ul class="styled-list">
+                        <li><strong>Invalid API key:</strong> Check your key and try again</li>
+                        <li><strong>Rate limit exceeded:</strong> Wait a minute and retry</li>
+                        <li><strong>Network error:</strong> Check your internet connection</li>
+                        <li><strong>Quota exceeded:</strong> Check your API usage limits</li>
+                    </ul>
+                    <p>The app will attempt to resume from where it failed when possible.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>Can I use this offline?</h3>
+                <div class="faq-answer">
+                    <p>Partially. Once you load the website, the interface works offline. However, you need an internet
+                        connection to make API calls to Google's Gemini service for the actual text transformation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item card">
+                <h3>What browsers are supported?</h3>
+                <div class="faq-answer">
+                    <p>Modern browsers with JavaScript enabled:</p>
+                    <ul class="styled-list">
+                        <li>Chrome/Edge (recommended)</li>
+                        <li>Firefox</li>
+                        <li>Safari</li>
+                        <li>Opera</li>
+                    </ul>
+                    <p>Mobile browsers work but may struggle with very large files due to memory constraints.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Spokable PDF Converter. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

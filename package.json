@@ -1,0 +1,31 @@
+{
+    "name": "spokable-pdf-converter",
+    "version": "1.0.0",
+    "description": "Convert technical PDFs to TTS-optimized format using Google Gemini API",
+    "main": "index.html",
+    "scripts": {
+        "start": "npx http-server -p 8000 -o",
+        "test": "echo \"Open test.html in browser to run tests\""
+    },
+    "keywords": [
+        "pdf",
+        "tts",
+        "text-to-speech",
+        "gemini",
+        "ai",
+        "accessibility",
+        "converter"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/spokable-pdf-converter.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yourusername/spokable-pdf-converter/issues"
+    },
+    "homepage": "https://github.com/yourusername/spokable-pdf-converter#readme",
+    "devDependencies": {},
+    "dependencies": {}
+}

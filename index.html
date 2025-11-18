@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert to Readable Spokable PDF</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">📖 Spokable PDF</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Convert PDFs to TTS-Friendly Format</h1>
+            <p class="subtitle">Transform technical PDFs into clean, readable documents optimized for text-to-speech
+                apps</p>
+        </section>
+
+        <section class="converter-section">
+            <div class="card">
+                <h2>Upload Your PDF</h2>
+
+                <div class="api-key-section">
+                    <label for="apiKey">
+                        Google AI Studio API Key
+                        <span class="tooltip" data-tooltip="Get your free API key from Google AI Studio">ℹ️</span>
+                    </label>
+                    <div class="input-group">
+                        <input type="password" id="apiKey" placeholder="Enter your Gemini API key">
+                        <button type="button" id="toggleApiKey" class="btn-icon">👁️</button>
+                    </div>
+                    <small>
+                        Don't have an API key?
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank">Get one here</a>
+                        | <a href="faq.html#api-key">How to get API key</a>
+                    </small>
+                </div>
+
+                <div class="upload-section">
+                    <label for="pdfFile">Select PDF File</label>
+                    <input type="file" id="pdfFile" accept=".pdf">
+                    <div id="fileInfo" class="file-info"></div>
+                </div>
+
+                <div class="options-section">
+                    <h3>Conversion Options</h3>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="convertCode" checked>
+                            Convert code examples to natural language descriptions
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="convertFigures" checked>
+                            Convert figures/images to descriptive summaries
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="optimizeTTS" checked>
+                            Optimize for text-to-speech clarity
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="modelSelect">Gemini Model</label>
+                        <select id="modelSelect">
+                            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Fast & Efficient)</option>
+                            <option value="gemini-1.5-pro">Gemini 1.5 Pro (Higher Quality)</option>
+                            <option value="gemini-pro">Gemini Pro</option>
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn-link" onclick="window.location.href='settings.html'">
+                        ⚙️ Advanced Settings
+                    </button>
+                </div>
+
+                <button id="convertBtn" class="btn-primary" disabled>
+                    Convert PDF
+                </button>
+
+                <div id="progressSection" class="progress-section" style="display: none;">
+                    <div class="progress-bar">
+                        <div id="progressBar" class="progress-fill"></div>
+                    </div>
+                    <p id="progressText">Processing...</p>
+                    <div id="progressDetails" class="progress-details"></div>
+                </div>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <h3>✅ Conversion Complete!</h3>
+                    <button id="downloadBtn" class="btn-success">Download Spokable PDF</button>
+                    <button id="resetBtn" class="btn-secondary">Convert Another PDF</button>
+                </div>
+
+                <div id="errorSection" class="error-section" style="display: none;">
+                    <h3>❌ Error</h3>
+                    <p id="errorMessage"></p>
+                    <button id="retryBtn" class="btn-secondary">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Text Processing</h3>
+                    <p>Automatically converts technical content into natural, spoken language</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔊</div>
+                    <h3>TTS Optimized</h3>
+                    <p>Perfect for Moon+ Reader Pro and other text-to-speech applications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Large Document Support</h3>
+                    <p>Automatic batching handles books and long documents seamlessly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Fully Customizable</h3>
+                    <p>Edit prompts, adjust parameters, and fine-tune the conversion process</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Spokable PDF Converter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- PDF.js for reading PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+
+    <!-- jsPDF for generating PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Application scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/gemini-api.js"></script>
+    <script src="js/pdf-processor.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
