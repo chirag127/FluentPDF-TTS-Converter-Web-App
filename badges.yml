@@ -1,0 +1,49 @@
+# Badges Configuration
+
+# This file defines the badges to be displayed in the README.
+# All URLs are dynamically generated based on the repository's context.
+
+# Base URL for the repository
+base_url: "https://github.com/chirag127/FluentPDF-TTS-Converter-Web-App"
+
+# Badges list
+badges:
+  - name: "Build Status"
+    # Assuming CI is configured for GitHub Actions. If not, this might need adjustment.
+    # For simplicity, pointing to the actions overview page.
+    url: "${base_url}/actions"
+    image: "https://img.shields.io/github/actions/workflow/status/chirag127/FluentPDF-TTS-Converter-Web-App/ci.yml?style=flat-square&label=Build"
+    markdown: "[![Build Status](https://img.shields.io/github/actions/workflow/status/chirag127/FluentPDF-TTS-Converter-Web-App/ci.yml?style=flat-square&label=Build)](https://github.com/chirag127/FluentPDF-TTS-Converter-Web-App/actions)"
+
+  - name: "Code Coverage"
+    # Placeholder for code coverage. Assumes integration with a service like Codecov.
+    # Replace with actual coverage URL if available.
+    url: "${base_url}/blob/main/coverage/index.html" # Example, may need service integration
+    image: "https://img.shields.io/codecov/c/github/chirag127/FluentPDF-TTS-Converter-Web-App?style=flat-square&token=YOUR_CODECOV_TOKEN" # Replace YOUR_CODECOV_TOKEN
+    markdown: "[![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/FluentPDF-TTS-Converter-Web-App?style=flat-square&token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/chirag127/FluentPDF-TTS-Converter-Web-App)"
+
+  - name: "Tech Stack (HTML, JS, CSS)"
+    # A simple badge representing the primary tech stack.
+    url: "${base_url}"
+    image: "https://img.shields.io/badge/Tech%20Stack-HTML%20%7C%20JavaScript%20%7C%20CSS-blue?style=flat-square"
+    markdown: "[![Tech Stack](https://img.shields.io/badge/Tech%20Stack-HTML%20%7C%20JavaScript%20%7C%20CSS-blue?style=flat-square)](https://github.com/chirag127/FluentPDF-TTS-Converter-Web-App)"
+
+  - name: "Linting & Formatting"
+    # Assuming a linter like ESLint or Prettier is used and integrated with CI.
+    # This badge indicates if the code adheres to linting rules.
+    url: "${base_url}/blob/main/.eslintrc.json" # Example, points to a config file
+    image: "https://img.shields.io/badge/Linter-ESLint-purple?style=flat-square"
+    markdown: "[![Linter](https://img.shields.io/badge/Linter-ESLint-purple?style=flat-square)](https://eslint.org/)"
+
+  - name: "License"
+    url: "${base_url}/blob/main/LICENSE"
+    image: "https://img.shields.io/badge/License-CC%20BY--NC%204.0-red?style=flat-square"
+    markdown: "[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-red?style=flat-square)](https://creativecommons.org/licenses/by-nc/4.0/)"
+
+  - name: "GitHub Stars"
+    url: "${base_url}"
+    image: "https://img.shields.io/github/stars/chirag127/FluentPDF-TTS-Converter-Web-App?style=flat-square&logo=github"
+    markdown: "[![GitHub Stars](https://img.shields.io/github/stars/chirag127/FluentPDF-TTS-Converter-Web-App?style=flat-square&logo=github)](https://github.com/chirag127/FluentPDF-TTS-Converter-Web-App)"
+
+# Note: Specific badges like Code Coverage might require additional setup and configuration
+# (e.g., CI service integration, API tokens) that are external to this configuration file.
